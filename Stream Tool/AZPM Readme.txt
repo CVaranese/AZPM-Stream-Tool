@@ -4,8 +4,10 @@ Project+ Stream Tool with the AZPM overlays on top.
 WHAT IS IN HERE
 - Project+ Stream Tool exe: fill in players, characters, score, round and casters, then press Update.
 - VS Screen.html          AZPM VS screen (also used for thumbnails). Works for singles and doubles.
-- AZPM Singles.html       game layout for singles: 4:3 game on the left, cam and casters on the right.
-- AZPM Doubles.html       game layout for doubles: cam and casters on the left, game on the right.
+- AZPM Singles.html       game layout for singles and doubles: game on the left, cam and casters
+                          on the right. The score shows as ticks that fill with the team colour.
+                          The game area is 1310x1080 (left edge to x 1310), the game's own shape.
+- AZPM Doubles.html       older 1-cam layout: cam and casters on the left, game on the right.
 - AZPM Commentary.html    commentator names on a bottom bar.
 - copytitle.bat           copies a VOD title for the current match to the clipboard.
 - Resources/AZPM/OBS Transitions   stinger transitions (Swoosh, Game In).
@@ -21,8 +23,8 @@ ADDING THE OVERLAYS TO OBS
 
 DOUBLES
 - Set the gamemode to doubles in the Stream Tool and fill in all four players.
-  The doubles layout and the VS screen show each team as "Player & Player".
-  Tags and pronouns are not shown on the doubles layout.
+  The game layouts and the VS screen show each team as "Player & Player".
+  Tags and pronouns are only shown in singles.
 - The old way also works: stay in singles mode and type both names in one player slot.
 
 VOD TITLES

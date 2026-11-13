@@ -6,6 +6,7 @@
 //
 //   #p1Wrapper / #p2Wrapper   holding #pNTag, #pNName, #pNPron (tag and pron optional)
 //   #p1Score / #p2Score       numeric score
+//   #p1Ticks / #p2Ticks       holding .scoreTick elements, one filled per game won
 //   #p1Color / #p2Color       box filled with the team colour
 //   #p1Icon  / #p2Icon        <img> for the character stock icon
 //   #round, #bestOf, #tournament
@@ -66,6 +67,11 @@ function update(data) {
         const colorEl = byId(`p${n}Color`);
         if (colorEl) colorEl.style.backgroundColor = data.color[side].hex;
 
+        // team colours for the css: var(--colorL) and var(--colorR)
+        document.body.style.setProperty(side ? "--colorR" : "--colorL", data.color[side].hex);
+
+        updateTicks(byId(`p${n}Ticks`), data.score[side], data.color[side].hex, data.bestOf);
+
         // stock icon of the character, singles only
         const p = data.player[side];
         const iconSrc = (!dubs && p && p.char && p.skin)
@@ -81,8 +87,11 @@ function update(data) {
     changeText(byId("round"), data.round);
     changeText(byId("tournament"), data.tournamentName);
 
+    // "Best of 5", or "Bo5" if the element has data-format="short"
     const bo = /^Bo(\d+)$/.exec(data.bestOf || "");
-    changeText(byId("bestOf"), bo ? `Best of ${bo[1]}` : "");
+    const bestOfEl = byId("bestOf");
+    const shortBo = bestOfEl && bestOfEl.dataset.format == "short";
+    changeText(bestOfEl, bo ? (shortBo ? data.bestOf : `Best of ${bo[1]}`) : "");
 
     for (let i = 0; i < data.caster.length; i++) {
         updateCaster(i + 1, data.caster[i]);
@@ -133,6 +142,52 @@ function setSizedText(el, text) {
     if (el.dataset.size) el.style.fontSize = el.dataset.size + "px";
     el.textContent = text || "";
     el.style.display = text ? "" : "none";
+}
+
+
+// ---------- score ticks ----------
+
+/** Colour of a score tick that has not been won yet */
+const emptyTickColor = "#081c54";
+
+/**
+ * Fills one tick per game won with the team colour. The box holds ".scoreTick"
+ * elements, first game first. Only as many ticks as games needed to win the set
+ * are shown (2 for a Bo3, 3 for a Bo5).
+ * @param {HTMLElement} box - Element holding the ticks (does nothing if the page doesn't have it)
+ * @param {Number} score - Games won
+ * @param {String} color - Team colour (hex)
+ * @param {String} bestOf - "Bo3", "Bo5"...
+ */
+function updateTicks(box, score, color, bestOf) {
+
+    if (!box) return;
+
+    const ticks = box.getElementsByClassName("scoreTick");
+    const bo = /^Bo(\d+)$/.exec(bestOf || "");
+    const needed = bo ? Math.ceil(Number(bo[1]) / 2) : ticks.length;
+
+    for (let i = 0; i < ticks.length; i++) {
+
+        ticks[i].style.opacity = i < needed ? 1 : 0;
+
+        const fill = i < score ? color : emptyTickColor;
+        const shape = ticks[i].querySelector("polygon");
+        if (shown.get(shape) === fill) continue;
+        shown.set(shape, fill);
+
+        if (firstUpdate) {
+            shape.style.fill = fill;
+        } else { // flash white, then settle on the new colour
+            shape.style.transition = `fill ${fadeInTime}s`;
+            shape.style.fill = "#ffffff";
+            setTimeout(() => {
+                if (shown.get(shape) === fill) shape.style.fill = fill;
+            }, fadeInTime * 1000);
+        }
+
+    }
+
 }
 
 

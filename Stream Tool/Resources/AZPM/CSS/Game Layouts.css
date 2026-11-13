@@ -1,6 +1,7 @@
 /*
 AZPM game layouts: AZPM Singles.html, AZPM Doubles.html, AZPM Commentary.html.
-Ported from the AZPM 2022 Stream Tool v1.5 (SinglesLayout / DubsLayout / Commentary).
+Singles is ported from the AZPM Stream Tool V1 of 2023 (Game Scoreboard 4.3),
+Doubles and Commentary from the AZPM 2022 Stream Tool v1.5.
 Positions are in px on a 1920x1080 canvas and follow the frame art in
 Resources/AZPM/Overlay/Game Layouts.
 */
@@ -19,6 +20,9 @@ Resources/AZPM/Overlay/Game Layouts.
 }
 
 body {
+    /* team colours, set by Layout.mjs */
+    --colorL: white;
+    --colorR: white;
     width: 1920px;
     height: 1080px;
     overflow: hidden;
@@ -33,6 +37,10 @@ body {
     position: absolute;
     left: 0;
     top: 0;
+}
+
+.mirror {
+    transform: scaleX(-1);
 }
 
 /* every text box: fixed place, text centered, shrinks to fit (see Layout.mjs) */
@@ -102,140 +110,146 @@ body {
 }
 
 
-/* ---------- AZPM Singles (4:3 game on the left, cam and casters on the right) ---------- */
+/* ---------- AZPM Singles (game on the left, cam and casters on the right) ----------
+   The game area of the frame is 1310x1080 (x 0-1309), the 640:528 shape of the
+   game's own picture. Also used for doubles: each side then shows "player & player". */
 
 .singles {
-    font-family: "Bison";
+    font-family: "ScoreFont";
 }
 
-.singles #round {
-    left: 857px;
+/* top bar: tournament, best of, round */
+.singles .topText {
     top: 0;
-    width: 400px;
-    height: 36px;
-    line-height: 36px;
+    height: 44px;
+    line-height: 43px;
+    filter: drop-shadow(0px 0px 3px black);
+}
+.singles #tournament {
+    left: 172px;
+    width: 380px;
 }
 .singles #bestOf {
-    left: 687px;
-    top: 17px;
-    width: 140px;
-    height: 28px;
-    line-height: 28px;
-    color: #CA7A13;
+    left: 586px;
+    width: 130px;
+    color: #AF9B15;
+}
+.singles #round {
+    left: 757px;
+    width: 360px;
 }
 
+/* bottom bar: names in the team colour */
 .singles .wrappers {
-    top: 1024px;
-    width: 255px;
-    height: 56px;
-    line-height: 54px;
+    top: 1023px;
+    width: 400px;
+    height: 57px;
+    line-height: 62px;
+    filter: drop-shadow(0px 0px 1px #000000);
 }
 .singles #p1Wrapper {
-    left: 318px;
+    left: 195px;
+    color: var(--colorL);
 }
 .singles #p2Wrapper {
-    left: 922px;
+    left: 715px;
+    color: var(--colorR);
+}
+.singles .name {
+    transition: color .3s;
 }
 .singles .tag {
-    padding-right: 4px;
+    padding-right: 6px;
+    color: #BDAE42;
 }
 .singles .pronouns {
-    padding-left: 4px;
-    color: #9700C9;
-    font-style: italic;
+    padding-left: 6px;
+    color: #BDAE42;
 }
 
-.singles .score {
-    top: 1025px;
-    width: 154px;
-    height: 55px;
-    line-height: 55px;
-    font-family: "ScoreFont";
-    font-size: 50px;
-}
-.singles #p1Score {
-    left: 0;
-    text-align: right;
-}
-.singles #p2Score {
-    left: 1356px;
-    text-align: left;
-}
-
-/* team colour box with the character's stock icon on it */
-.singles .color {
+/* score ticks: one per game needed to win, filled with the team colour when won.
+   Same markup and offsets as the 2023 layout. */
+.singles .scores {
     position: absolute;
-    top: 1017px;
-    width: 54px;
-    height: 63px;
-    overflow: hidden;
+    bottom: 57px;
 }
-.singles #p1Color {
-    left: 624px;
+.singles #p1Ticks {
+    left: 82px;
 }
-.singles #p2Color {
-    left: 848px;
+.singles #p2Ticks {
+    left: 1123px;
 }
-.singles .charIcon {
-    position: absolute;
-    left: -5px;
-    top: 0;
-    width: 64px;
-    height: 64px;
-    visibility: hidden;
+.singles .scoreTick {
+    position: relative;
+    transition: opacity .3s;
+}
+.singles .scoreTick polygon {
+    fill: #081C54;
+}
+.singles .scoreTickColor {
+    width: 100px;
+    height: 100px;
+}
+.singles #p1Ticks .scoreTick:nth-child(2) {
+    right: 40px;
+}
+.singles #p1Ticks .scoreTick:nth-child(3) {
+    right: 80px;
+}
+.singles #p2Ticks .scoreTick:nth-child(2) {
+    left: 40px;
+}
+.singles #p2Ticks .scoreTick:nth-child(3) {
+    left: 80px;
 }
 
+/* right panel: casters */
 .singles .caster {
-    left: 1625px;
-    width: 272px;
+    left: 1485px;
+    width: 402px;
     height: 50px;
-    line-height: 50px;
+    line-height: 48px;
+    filter: drop-shadow(0px 0px 3px black);
 }
 .singles #caster1 {
-    top: 262px;
+    top: 261px;
 }
 .singles #caster2 {
-    top: 320px;
+    top: 321px;
 }
 .singles .casterNameBox {
     position: absolute;
-    left: 10px;
+    left: 12px;
     top: 0;
 }
 .singles .micIcon {
-    width: 30px;
-    height: 30px;
-    margin: 0 -4px;
-    vertical-align: -5px;
+    width: 26px;
+    height: 26px;
+    margin-right: 4px;
+    vertical-align: -6px;
 }
 .singles .casterName {
     display: inline-block;
-    width: 122px;
+    max-width: 200px;
     text-align: left;
     vertical-align: top;
 }
 .singles .casterSocial {
     position: absolute;
-    right: 12px;
-    top: 0;
+    right: 10px;
+    top: -2px;
+    color: #AF9B18;
 }
 .singles .casterSocial .icon {
-    width: 24px;
-    height: 24px;
-    vertical-align: -4px;
+    width: 20px;
+    height: 20px;
+    vertical-align: -3px;
 }
 .singles .socialText {
     display: inline-block;
-    max-width: 80px;
+    max-width: 130px;
     text-align: left;
     vertical-align: top;
-}
-
-.singles #sponsorBox {
-    left: 1580px;
-    top: 700px;
-    width: 300px;
-    height: 300px;
 }
 
 
