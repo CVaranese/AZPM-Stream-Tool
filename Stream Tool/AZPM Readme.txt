@@ -13,13 +13,40 @@ WHAT IS IN HERE
 - Resources/AZPM/OBS Transitions   stinger transitions (Swoosh, Game In).
 The stock overlays (16.9 Scoreboard, 4.3 Scoreboard, Bracket) still work as usual.
 
-ADDING THE OVERLAYS TO OBS
-- Drag the html file into OBS, or add a Browser source, tick "Local file" and pick the html file.
-- Set the source to 1920 wide and 1080 high.
-- Turn on "Refresh browser when scene becomes active".
+INSTALLING
+1. Unzip the whole folder somewhere it can stay (for example Documents\AZPM Stream Tool).
+   Do not run it from inside the zip. Keep the files together: the html files need the
+   Resources folder next to them.
+2. Open "Project+ Stream Tool 2.3.0.exe". Windows may warn about an unknown app:
+   "More info" > "Run anyway". The first start takes a few seconds.
+3. Fill in a test match (two players and characters) and press UPDATE.
+4. Set up OBS (below). The exe has to stay open while streaming.
+
+Updating from an older AZPM Stream Tool: unzip the new one into a new folder, then in OBS
+point every browser source at the new folder's html files (Properties > Browse) and press
+"Refresh cache of current page" in each. To keep your player and commentator presets, copy
+the old Resources/Texts/Player Info and Resources/Texts/Commentator Info folders over.
+
+SETTING UP OBS
+OBS canvas: Settings > Video > Base (Canvas) Resolution 1920x1080.
+
+Adding an overlay (do this for each html file you use):
+- Sources > + > Browser. Tick "Local file" and pick the html file from the tool's folder.
+- Width 1920, Height 1080.
+- Tick "Refresh browser when scene becomes active".
   "Shutdown source when not visible" saves resources if you want it.
-- The Stream Tool exe has to be open; the overlays get their info from it.
-  With the exe closed they show "Can't connect with GUI" in the bottom left corner.
+- If the overlay shows "Can't connect with GUI" in the bottom left corner, the exe is not open.
+
+Suggested scenes:
+- VS / Thumbnail scene: one browser source, VS Screen.html.
+- Game scene: browser source AZPM Singles.html on top, the game capture (Dolphin window
+  capture or capture card) below it, placed in the game area on the left (x 0 to 1310,
+  full height). Put your webcam below the overlay, lined up with the cam box on the right.
+  Use AZPM Doubles.html instead for the older 1-cam layout (game on the right).
+- Commentary scene: your cams plus a browser source AZPM Commentary.html on top.
+Order in the Sources list: the overlay must be ABOVE the game and cam sources.
+
+Stinger transitions: see TRANSITIONS below.
 
 DOUBLES
 - Set the gamemode to doubles in the Stream Tool and fill in all four players.
