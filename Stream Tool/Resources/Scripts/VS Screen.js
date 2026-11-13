@@ -7,6 +7,7 @@ import { gamemode } from "./VS Screen/Gamemode Change.mjs";
 import { players } from "./VS Screen/Player/Players.mjs";
 import { roundInfo } from "./VS Screen/Round Info/Round Info.mjs";
 import { teams } from "./VS Screen/Team/Teams.mjs";
+import { updateAzpmVs } from "../AZPM/Scripts/VS Screen.mjs"; // AZPM
 
 // this is a weird way to have file svg's that can be recolored by css
 customElements.define("load-svg", class extends HTMLElement {
@@ -56,6 +57,8 @@ function updateData(data) {
 
 	// and update commentators
 	casters.update(data.caster);
+
+	updateAzpmVs(data); // AZPM: character names, singles/doubles class
 
 	// many modules need to know if we are loading the view up or not
 	if (current.startup) {

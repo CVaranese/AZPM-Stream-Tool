@@ -1,0 +1,215 @@
+/*
+AZPM look for the VS Screen (thumbnails), ported from the AZPM 2022 Stream Tool v1.5.
+Loaded after VS Screen.css and VS Screen Custom.css, so everything here
+overrides the stock style. Upstream CSS files are not modified.
+*/
+
+@font-face {
+    font-family: "AZPM";
+    src: url('../Fonts/Bebas-Regular.ttf');
+}
+
+/* shared AZPM background video, stretched to the full canvas */
+#azpmBG {
+    width: 1920px;
+    height: 1080px;
+    object-fit: cover;
+}
+
+/* stock per-character backgrounds, color gradients, name bars, trails and info boxes off */
+#bgVids,
+#colorGrads,
+.textBGs,
+#playerInfos,
+.trail {
+    display: none;
+}
+
+/* AZPM layer (top/bottom bars, gold VS) sits over the characters.
+   The stock overlay is hidden instead of replaced, because the stock
+   gamemode script resets its image whenever the gamemode changes. */
+#vsOverlay {
+    display: none;
+}
+#azpmLayer {
+    z-index: 1;
+}
+
+/* everything with text sits over the layer */
+#playerTexts,
+#azpmCharNames {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 1080px;
+    z-index: 2;
+}
+#middleDivs {
+    z-index: 2;
+    filter: none;
+}
+
+/* player names in the bottom bar */
+.wrappers {
+    font-family: "AZPM";
+    text-shadow: none;
+    filter: drop-shadow(0px 0px 2px #2B001C);
+}
+.wrappersSingles {
+    transform: none;
+    width: 45%;
+    height: 130px;
+    bottom: 30px;
+    line-height: 90px;
+}
+.p1WSingles {
+    left: 2.5%;
+}
+.p2WSingles {
+    right: 2.5%;
+}
+.name {
+    color: #FFFFFF;
+}
+.tag {
+    color: #FFFFFF;
+    padding-right: 6px;
+}
+
+/* character name under the player name, AZPM red */
+.azpmCharName {
+    position: absolute;
+    width: 45%;
+    height: 120px;
+    bottom: -20px;
+    line-height: 90px;
+    font-family: "AZPM";
+    font-size: 50px;
+    text-align: center;
+    white-space: nowrap;
+    color: #D01D44;
+    filter: drop-shadow(0px 0px 2px #2B001C);
+}
+#p1CharName {
+    left: 2.5%;
+}
+#p2CharName {
+    right: 2.5%;
+}
+
+/* top bar: casters first, then tournament and round */
+#middleDivs {
+    --singlesTopMargin: 0px;
+}
+#casterInfo {
+    order: -1;
+    height: 60px !important;
+}
+.casterInfoSingles,
+.roundInfoSingles {
+    border: none;
+    border-image: none;
+}
+#casters {
+    gap: 430px;
+    font-family: "AZPM";
+}
+.casterDiv ~ .casterDiv::before,
+.casterSep,
+.casterTag,
+.casterDiv .socialBox {
+    display: none;
+}
+.casterName {
+    color: #D11E45;
+    filter: drop-shadow(0px 0px 2px #FF0084);
+}
+.micIcon {
+    fill: #FFFFFF;
+    height: 30px;
+    width: 30px;
+    filter: drop-shadow(0px 0px 2px #000000);
+}
+
+#roundInfo {
+    font-family: "AZPM";
+    height: 100px;
+    margin-top: 18px;
+}
+#tournament {
+    color: #FFFFFF;
+    filter: drop-shadow(0px 0px 2px #2B001C);
+    line-height: 36px;
+}
+#round {
+    color: #D11E45;
+    filter: drop-shadow(0px 0px 2px #D11E45);
+    margin-top: 0;
+    line-height: 54px;
+}
+
+/*
+Doubles. body.azpmDubs is set by Resources/AZPM/Scripts/VS Screen.mjs.
+Same frame as singles: casters / tournament / round stay in the top bar,
+the four characters share the middle (two rows), and each side of the
+bottom bar shows "player & player" with the team name under it.
+*/
+body.azpmDubs #middleDivs {
+    --doublesTopMargin: 0px;
+}
+body.azpmDubs .casterInfoDoubles {
+    margin-top: 0;
+}
+/* each row shows the 270-630px band of the character image (where the
+   stock doubles layout also looks), placed at 180-540 (top) and 540-900 (bottom) */
+body.azpmDubs .dubsClip {
+    clip: rect(270px, 960px, 630px, 0px);
+}
+/* the stock script sets the top row's position inline, hence !important */
+body.azpmDubs #topRow {
+    top: -90px !important;
+}
+body.azpmDubs #botRow {
+    top: 270px;
+}
+/* stock doubles name plates and team names are replaced by the lines below */
+body.azpmDubs #playerTexts {
+    display: none;
+}
+.azpmDubsNames {
+    display: none;
+    position: absolute;
+    width: 45%;
+    height: 130px;
+    bottom: 30px;
+    line-height: 90px;
+    font-family: "AZPM";
+    font-size: 80px;
+    text-align: center;
+    white-space: nowrap;
+    color: #FFFFFF;
+    filter: drop-shadow(0px 0px 2px #2B001C);
+}
+body.azpmDubs .azpmDubsNames {
+    display: block;
+}
+#azpmDubsNamesL {
+    left: 2.5%;
+}
+#azpmDubsNamesR {
+    right: 2.5%;
+}
+.azpmDubsTag {
+    font-size: .5em;
+    padding-right: 6px;
+}
+.azpmDubsAnd {
+    color: #D01D44;
+    padding: 0 14px;
+}
+
+/* the old VS screen had no score */
+#scores {
+    display: none;
+}

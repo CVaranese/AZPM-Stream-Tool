@@ -5,8 +5,8 @@ import { resizeText } from "../../Utils/Resize Text.mjs";
 import { gamemode } from "../Gamemode Change.mjs";
 import { fadeInTimeVs, fadeOutTimeVs, introDelayVs } from "../VsGlobals.mjs";
 
-const playerSize = 90;
-const tagSize = 50;
+const playerSize = 80; // AZPM (stock 90)
+const tagSize = 40; // AZPM (stock 50)
 const playerSizeDubs = 45;
 const tagSizeDubs = 25;
 

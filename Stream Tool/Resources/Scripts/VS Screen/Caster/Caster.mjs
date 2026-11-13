@@ -7,7 +7,7 @@ import { fadeInTimeVs, fadeOutTimeVs } from "../VsGlobals.mjs";
 
 const casterInfoDiv = document.getElementById("casters");
 
-const nameSize = 25;
+const nameSize = 36; // AZPM (stock 25)
 const tagSize = 15;
 const socialSize = 19;
 

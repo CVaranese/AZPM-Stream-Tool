@@ -6,8 +6,8 @@ import { RoundTournament } from "./Round Tournament.mjs";
 
 const roundInfoEl = document.getElementById("roundInfo");
 
-const tournament = new RoundTournament(document.getElementById("tournament"), 28);
-const round = new RoundTournament(document.getElementById("round"), 30);
+const tournament = new RoundTournament(document.getElementById("tournament"), 36); // AZPM (stock 28)
+const round = new RoundTournament(document.getElementById("round"), 54); // AZPM (stock 30)
 
 class RoundInfo {
 

@@ -6,9 +6,13 @@
     <script src="Resources/Scripts/VS Screen.js" type="module"></script>
     <link rel="stylesheet" href="Resources/CSS/VS Screen.css">
     <link rel="stylesheet" href="Resources/CSS/VS Screen Custom.css">
+    <link rel="stylesheet" href="Resources/AZPM/CSS/VS Screen.css"> <!-- AZPM -->
 </head>
 
 <body>
+    <!-- AZPM: shared background video (replaces the per-character backgrounds) -->
+    <video autoplay loop muted class="absol" id="azpmBG" src="Resources/AZPM/Overlay/VS Screen/AZPM BG.mp4"></video>
+
     <div id="bgVids">
         <video autoplay loop class="absol bgVid" id="vidBGP1"></video>
         <video autoplay loop class="absol bgVid" id="vidBGP2"></video>
@@ -117,6 +121,18 @@
     </div>
 
     <img src="Resources/Overlay/VS Screen/VS Overlay.png" id="vsOverlay" class="absol" alt=""/>
+
+    <!-- AZPM: Arizona bars + gold VS (the stock overlay above is hidden by the AZPM css) -->
+    <img src="Resources/AZPM/Overlay/VS Screen/AZPM Layer.png" id="azpmLayer" class="absol" alt=""/>
+
+    <!-- AZPM: character name under each player name (singles),
+         "player & player" with the team name under it (doubles) -->
+    <div id="azpmCharNames">
+        <span id="azpmDubsNamesL" class="azpmDubsNames"></span>
+        <span id="azpmDubsNamesR" class="azpmDubsNames"></span>
+        <span id="p1CharName" class="azpmCharName"></span>
+        <span id="p2CharName" class="azpmCharName"></span>
+    </div>
 
     <div id="middleDivs">
 

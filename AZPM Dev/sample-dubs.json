@@ -1,0 +1,55 @@
+{
+  "player": [
+    {
+      "pronouns": "he/him", "tag": "AZ", "name": "Player One", "state": "",
+      "socials": {},
+      "sc": {"charImg": "Resources/Characters/Captain Falcon/Skins/Captain Falcon (1).png", "charPos": [25, 20, 1.5]},
+      "vs": {"charImg": "Resources/Characters/Captain Falcon/Skins/Captain Falcon (1).png", "charPos": [-485, 190, 2.5],
+             "trailImg": "", "bgVid": "Resources/Characters/BG.webm", "skin": "Captain Falcon (1)"},
+      "char": "Captain Falcon", "skin": "Captain Falcon (1)"
+    },
+    {
+      "pronouns": "she/her", "tag": "", "name": "Player Two", "state": "",
+      "socials": {},
+      "sc": {"charImg": "Resources/Characters/Marth/Skins/Marth (1).png", "charPos": [25, 20, 1.5]},
+      "vs": {"charImg": "Resources/Characters/Marth/Skins/Marth (1).png", "charPos": [-485, 190, 2.5],
+             "trailImg": "", "bgVid": "Resources/Characters/BG.webm", "skin": "Marth (1)"},
+      "char": "Marth", "skin": "Marth (1)"
+    },
+    {
+      "pronouns": "", "tag": "", "name": "Player Three", "state": "",
+      "socials": {},
+      "sc": {"charImg": "Resources/Characters/Fox/Skins/Fox (1).png", "charPos": [25, 20, 1.5]},
+      "vs": {"charImg": "Resources/Characters/Fox/Skins/Fox (1).png", "charPos": [-485, 190, 2.5],
+             "trailImg": "", "bgVid": "Resources/Characters/BG.webm", "skin": "Fox (1)"},
+      "char": "Fox", "skin": "Fox (1)"
+    },
+    {
+      "pronouns": "", "tag": "AZ", "name": "Player Four", "state": "",
+      "socials": {},
+      "sc": {"charImg": "Resources/Characters/Peach/Skins/Peach (1).png", "charPos": [25, 20, 1.5]},
+      "vs": {"charImg": "Resources/Characters/Peach/Skins/Peach (1).png", "charPos": [-485, 190, 2.5],
+             "trailImg": "", "bgVid": "Resources/Characters/BG.webm", "skin": "Peach (1)"},
+      "char": "Peach", "skin": "Peach (1)"
+    }
+  ],
+  "teamName": ["Red Team", "Blue Team"],
+  "color": [{"name": "Red", "hex": "#FE2727"}, {"name": "Blue", "hex": "#4756DD"}],
+  "score": [1, 0],
+  "wl": ["W", "L"],
+  "bestOf": "Bo5",
+  "gamemode": 2,
+  "round": "Winners Finals",
+  "tournamentName": "AZPM Weekly #100",
+  "caster": [
+    {"name": "Caster One", "pronouns": "", "tag": "", "socials": {"twitter": "casterone", "twitch": "", "yt": ""}},
+    {"name": "Caster Two", "pronouns": "", "tag": "", "socials": {"twitter": "castertwo", "twitch": "", "yt": ""}}
+  ],
+  "socialNames": ["twitch", "yt", "twitter"],
+  "allowIntro": false,
+  "customRound": false,
+  "forceWL": false,
+  "roundIndex": 0,
+  "roundNumber": 1,
+  "id": "gameData"
+}
