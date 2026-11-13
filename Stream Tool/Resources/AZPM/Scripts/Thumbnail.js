@@ -10,7 +10,33 @@ const fs = require('fs');
 const path = require('path');
 
 const WIDTH = 1280, HEIGHT = 720; // YouTube thumbnail size
-const SETTLE_MS = 4000; // the VS Screen intro animations take about 3 seconds
+const MAX_WAIT_MS = 5000; // give up waiting for the page to be ready after this
+
+// The VS Screen intro is css animations (Utils/Fade In.mjs, "fadeIn 0.4s 0.35s both" and so on).
+// Squashing them to 1 ms makes the page show its final state right away. 1 ms and not 0,
+// so "animationend" (which the fade outs wait for) still fires.
+const NO_INTRO_CSS = `*, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0s !important;
+    transition: none !important;
+}`;
+
+// null while something is still loading or animating, else a short description of the
+// page state (compared between polls: the page counts as ready once it stops changing)
+const READY_CHECK = `(() => {
+    if (document.fonts.status !== "loaded") return null;
+    const imgs = [...document.images].filter(i => i.getAttribute("src"));
+    if (imgs.some(i => !i.complete)) return null;
+    for (const vid of document.querySelectorAll("video")) {
+        if (vid.getAttribute("src") && vid.readyState < 2) return null;
+    }
+    const anims = document.getAnimations();
+    if (anims.some(a => a.playState === "running")) return null;
+    return imgs.map(i => i.src).join("|") + "#" + anims.length + "#" + document.body.innerText.length;
+})()`;
+
+const POLL_MS = 100;
+const STABLE_POLLS = 3; // same state this many polls in a row = done
 
 let lastGameData = null;
 let busy = false;
@@ -76,9 +102,15 @@ async function capture(pagePath) {
 
     try {
         win.webContents.setAudioMuted(true);
+        win.webContents.once("dom-ready", () => {
+            win.webContents.insertCSS(NO_INTRO_CSS);
+        });
+        // when the page's websocket connects, the GUI sends it the match data
+        const dataSent = nextGameDataSend(MAX_WAIT_MS);
         await win.loadFile(pagePath);
         win.webContents.setZoomFactor(WIDTH / 1920);
-        await new Promise(r => setTimeout(r, SETTLE_MS));
+        await dataSent;
+        await waitReady(win, MAX_WAIT_MS);
         const image = await win.webContents.capturePage();
         if (image.isEmpty()) throw new Error("The VS Screen picture came out empty");
         return image.resize({ width: WIDTH, height: HEIGHT, quality: "best" });
@@ -86,6 +118,38 @@ async function capture(pagePath) {
         win.destroy();
     }
 
+}
+
+/** Resolves on the next game data the GUI sends to the overlays, or after ms */
+function nextGameDataSend(ms) {
+    return new Promise(resolve => {
+        const done = () => {
+            clearTimeout(timer);
+            ipcMain.removeListener('sendData', listener);
+            resolve();
+        };
+        const listener = (event, data) => {
+            if (data && String(data).includes('"gameData"')) done();
+        };
+        const timer = setTimeout(done, ms);
+        ipcMain.on('sendData', listener);
+    });
+}
+
+/** Polls the page until it stops changing (see READY_CHECK), or until ms passed */
+async function waitReady(win, ms) {
+    const end = Date.now() + ms;
+    let last = null, same = 0;
+    while (Date.now() < end) {
+        await new Promise(r => setTimeout(r, POLL_MS));
+        const state = await win.webContents.executeJavaScript(READY_CHECK).catch(() => null);
+        if (state !== null && state === last) {
+            if (++same >= STABLE_POLLS) return;
+        } else {
+            same = 0;
+        }
+        last = state;
+    }
 }
 
 /** "Name (Character)" for one side; Random shows the team colour, CPU shows nothing */

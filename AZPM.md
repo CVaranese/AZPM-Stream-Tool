@@ -15,7 +15,9 @@ Usage notes for streamers are in [Stream Tool/AZPM Readme.txt](Stream%20Tool/AZP
 | `AZPM Dev/` | render helpers, sample data, reference renders, zip script (not shipped) |
 
 The thumbnail export (`Resources/AZPM/Scripts/Thumbnail.js`, run by the exe) loads `VS Screen.html`
-in a hidden offscreen window, waits 4 s for the intro, and saves a 1280x720 PNG to `Thumbnails/`.
+in a hidden offscreen window with the intro animations squashed to 1 ms, waits for the GUI's data
+and for the page to stop changing (images, video frame, animations; 5 s at most), and saves a
+1280x720 PNG to `Thumbnails/`. About 0.8 s.
 The window is 1280x720 with the page zoomed to 2/3: a 1920x1080 window gets clamped to the
 screen height on a 1080p monitor and squashes the page.
 

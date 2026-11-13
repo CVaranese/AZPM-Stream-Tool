@@ -35,7 +35,7 @@ VOD TITLES
 VOD THUMBNAILS
 - In the Stream Tool: Settings > "Export thumbnail". It takes a picture of the VS Screen
   with the info of the last Update (press Update first) and saves a 1280x720 PNG in the
-  "Thumbnails" folder next to the exe, named like the VOD title. Takes about 5 seconds.
+  "Thumbnails" folder next to the exe, named like the VOD title. Takes about a second.
 - "Open thumbnails folder" opens that folder.
 
 TRANSITIONS
