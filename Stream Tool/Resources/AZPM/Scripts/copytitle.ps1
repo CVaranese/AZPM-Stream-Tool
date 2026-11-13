@@ -56,7 +56,9 @@ try {
     exit 1
 }
 
-$title = "$($data.tournamentName) - $($data.round) - $(Format-Side $data 0) VS $(Format-Side $data 1)"
+# blank fields (no tournament name, for example) are left out
+$title = (@($data.tournamentName, $data.round, "$(Format-Side $data 0) VS $(Format-Side $data 1)") |
+    Where-Object { $_ }) -join " - "
 
 if (-not $NoClipboard) { Set-Clipboard -Value $title }
 Write-Host $title
