@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AZPM Doubles Layout</title>
+    <script src="Resources/AZPM/Scripts/Layout.mjs" type="module"></script>
+    <link rel="stylesheet" href="Resources/AZPM/CSS/Game Layouts.css">
+</head>
+
+<body class="doubles">
+
+    <img class="absol" src="Resources/AZPM/Overlay/Game Layouts/Doubles.png" alt="">
+
+    <!-- top bar: team names ("player & player"), team colours with score, round -->
+    <span id="p1Wrapper" class="textBox wrappers">
+        <span id="p1Name" class="name" data-size="50"></span>
+    </span>
+    <div id="p1Color" class="color">
+        <span id="p1Score" class="textBox score"></span>
+    </div>
+
+    <span id="round" class="textBox light" data-size="38"></span>
+    <span id="bestOf" class="textBox" data-size="18"></span>
+
+    <div id="p2Color" class="color">
+        <span id="p2Score" class="textBox score"></span>
+    </div>
+    <span id="p2Wrapper" class="textBox wrappers">
+        <span id="p2Name" class="name" data-size="50"></span>
+    </span>
+
+    <!-- left panel: casters and logo slideshow -->
+    <div id="caster1" class="caster">
+        <span class="casterNameBox">
+            <span class="icon micIcon"></span>
+            <span id="caster1Name" class="casterName" data-size="40"></span>
+        </span>
+        <span id="caster1Social" class="casterSocial">
+            <span class="icon"></span>
+            <span class="socialText" data-size="18"></span>
+        </span>
+    </div>
+    <div id="caster2" class="caster">
+        <span class="casterNameBox">
+            <span class="icon micIcon"></span>
+            <span id="caster2Name" class="casterName" data-size="40"></span>
+        </span>
+        <span id="caster2Social" class="casterSocial">
+            <span class="icon"></span>
+            <span class="socialText" data-size="18"></span>
+        </span>
+    </div>
+
+    <div id="sponsorBox"></div>
+
+    <div id="connErrorDiv">
+        Can't connect with GUI, attempting to reconnect every 5 seconds...
+    </div>
+
+</body>
+</html>

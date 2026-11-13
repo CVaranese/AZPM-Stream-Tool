@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AZPM Singles Layout</title>
+    <script src="Resources/AZPM/Scripts/Layout.mjs" type="module"></script>
+    <link rel="stylesheet" href="Resources/AZPM/CSS/Game Layouts.css">
+</head>
+
+<body class="singles">
+
+    <img class="absol" src="Resources/AZPM/Overlay/Game Layouts/Singles.png" alt="">
+
+    <!-- top bar -->
+    <span id="bestOf" class="textBox" data-size="24"></span>
+    <span id="round" class="textBox light" data-size="36"></span>
+
+    <!-- bottom bar: score, name, character icon on the team colour -->
+    <span id="p1Score" class="textBox score light"></span>
+    <span id="p1Wrapper" class="textBox wrappers light">
+        <span id="p1Tag" class="tag" data-size="26"></span><span id="p1Name" class="name" data-size="40"></span><span id="p1Pron" class="pronouns" data-size="20"></span>
+    </span>
+    <div id="p1Color" class="color">
+        <img id="p1Icon" class="charIcon" alt="">
+    </div>
+
+    <div id="p2Color" class="color">
+        <img id="p2Icon" class="charIcon" alt="">
+    </div>
+    <span id="p2Wrapper" class="textBox wrappers light">
+        <span id="p2Tag" class="tag" data-size="26"></span><span id="p2Name" class="name" data-size="40"></span><span id="p2Pron" class="pronouns" data-size="20"></span>
+    </span>
+    <span id="p2Score" class="textBox score light"></span>
+
+    <!-- right panel: casters and logo slideshow -->
+    <div id="caster1" class="caster">
+        <span class="casterNameBox">
+            <span class="icon micIcon"></span>
+            <span id="caster1Name" class="casterName" data-size="31"></span>
+        </span>
+        <span id="caster1Social" class="casterSocial light">
+            <span class="icon"></span>
+            <span class="socialText" data-size="25"></span>
+        </span>
+    </div>
+    <div id="caster2" class="caster">
+        <span class="casterNameBox">
+            <span class="icon micIcon"></span>
+            <span id="caster2Name" class="casterName" data-size="31"></span>
+        </span>
+        <span id="caster2Social" class="casterSocial light">
+            <span class="icon"></span>
+            <span class="socialText" data-size="25"></span>
+        </span>
+    </div>
+
+    <div id="sponsorBox"></div>
+
+    <div id="connErrorDiv">
+        Can't connect with GUI, attempting to reconnect every 5 seconds...
+    </div>
+
+</body>
+</html>

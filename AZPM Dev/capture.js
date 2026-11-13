@@ -1,10 +1,11 @@
 // Screenshot a page in headless Chrome after a real-time wait, printing console output.
-// usage: node capture.js <url> <out.png> [waitMs]
+// usage: node capture.js <url> <out.png> [waitMs] [x,y,width,height]
+// The optional last argument captures only that part of the page.
 const { spawn } = require("child_process");
 const path = require("path");
 const http = require("http");
 
-const [url, out, waitArg] = process.argv.slice(2);
+const [url, out, waitArg, clipArg] = process.argv.slice(2);
 const waitMs = Number(waitArg || 5000);
 const chrome = "C:/Program Files/Google/Chrome/Application/chrome.exe";
 const port = 9333;
@@ -55,7 +56,12 @@ const getJson = (u) => new Promise((res, rej) => {
   await send("Emulation.setDeviceMetricsOverride", { width: 1920, height: 1080, deviceScaleFactor: 1, mobile: false });
   await send("Page.navigate", { url });
   await sleep(waitMs);
-  const shot = await send("Page.captureScreenshot", { format: "png" });
+  const shotParams = { format: "png" };
+  if (clipArg) {
+    const [x, y, width, height] = clipArg.split(",").map(Number);
+    shotParams.clip = { x, y, width, height, scale: 1 };
+  }
+  const shot = await send("Page.captureScreenshot", shotParams);
   require("fs").writeFileSync(out, Buffer.from(shot.data, "base64"));
   console.log("wrote", out);
   ws.close();

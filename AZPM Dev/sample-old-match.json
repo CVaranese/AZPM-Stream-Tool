@@ -1,0 +1,39 @@
+{
+  "player": [
+    {
+      "pronouns": "", "tag": "", "name": "Anday", "state": "",
+      "socials": {},
+      "sc": {"charImg": "Resources/Characters/Captain Falcon/Skins/Captain Falcon (1).png", "charPos": [25, 20, 1.5]},
+      "vs": {"charImg": "Resources/Characters/Captain Falcon/Skins/Captain Falcon (1).png", "charPos": [-485, 190, 2.5],
+             "trailImg": "", "bgVid": "Resources/Characters/BG.webm", "skin": "Captain Falcon (1)"},
+      "char": "Captain Falcon", "skin": "Captain Falcon (1)"
+    },
+    {
+      "pronouns": "", "tag": "", "name": "Ford$", "state": "",
+      "socials": {},
+      "sc": {"charImg": "Resources/Characters/Ganondorf/Skins/Ganondorf (1).png", "charPos": [25, 20, 1.5]},
+      "vs": {"charImg": "Resources/Characters/Ganondorf/Skins/Ganondorf (1).png", "charPos": [-485, 190, 2.5],
+             "trailImg": "", "bgVid": "Resources/Characters/BG.webm", "skin": "Ganondorf (1)"},
+      "char": "Ganondorf", "skin": "Ganondorf (1)"
+    }
+  ],
+  "teamName": ["Red Team", "Blue Team"],
+  "color": [{"name": "Red", "hex": "#E80000"}, {"name": "Blue", "hex": "#0C6CEC"}],
+  "score": [2, 1],
+  "wl": ["", ""],
+  "bestOf": "Bo5",
+  "gamemode": 1,
+  "round": "Winners Finals",
+  "tournamentName": "Project Mana 43",
+  "caster": [
+    {"name": "Bad Bully", "pronouns": "", "tag": "", "socials": {"twitter": "bahbooey", "twitch": "badbooby", "yt": ""}},
+    {"name": "Dox", "pronouns": "", "tag": "", "socials": {"twitter": "iEatRocks", "twitch": "IEatRocks", "yt": ""}}
+  ],
+  "socialNames": ["twitch", "yt", "twitter"],
+  "allowIntro": false,
+  "customRound": false,
+  "forceWL": false,
+  "roundIndex": 0,
+  "roundNumber": 1,
+  "id": "gameData"
+}
