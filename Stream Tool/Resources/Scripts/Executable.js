@@ -30,6 +30,9 @@ module.exports = function initExec(rPath, nPath, wSocket) {
         initHttpServer();
         initWsServer(wSocket);
 
+        // AZPM: VOD thumbnail export (Resources/AZPM/Scripts/Thumbnail.js)
+        try { require(resourcesPath + "/AZPM/Scripts/Thumbnail.js")(resourcesPath); } catch (e) { console.log(e); }
+
     } catch (e) { // if the settings file cant be found
         console.log("GUI Settings.json could not be found!!");
         console.log(e);

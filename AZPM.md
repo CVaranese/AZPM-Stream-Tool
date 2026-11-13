@@ -14,15 +14,22 @@ Usage notes for streamers are in [Stream Tool/AZPM Readme.txt](Stream%20Tool/AZP
 | `Stream Tool/AZPM Readme.txt` | usage notes that ship in the zip |
 | `AZPM Dev/` | render helpers, sample data, reference renders, zip script (not shipped) |
 
+The thumbnail export (`Resources/AZPM/Scripts/Thumbnail.js`, run by the exe) loads `VS Screen.html`
+in a hidden offscreen window, waits 4 s for the intro, and saves a 1280x720 PNG to `Thumbnails/`.
+The window is 1280x720 with the page zoomed to 2/3: a 1920x1080 window gets clamped to the
+screen height on a 1080p monitor and squashes the page.
+
 The game layouts get their data from the GUI over the same websocket as the stock scoreboards
 (`Resources/AZPM/Scripts/Layout.mjs`), and reuse upstream's `Utils` modules and SVG icons.
 
 ## Upstream files that are edited
 
-Only the VS Screen needed edits in upstream files. Each edit is marked with `AZPM`:
+Only the VS Screen and the thumbnail button needed edits in upstream files. Each edit is marked with `AZPM`:
 
 | File | Edit |
 |---|---|
+| `Stream Tool/Resources/GUI.html` | thumbnail buttons in settings + one script tag (added lines only) |
+| `Stream Tool/Resources/Scripts/Executable.js` | one line that loads `AZPM/Scripts/Thumbnail.js` |
 | `Stream Tool/VS Screen.html` | AZPM css link, background video, AZPM layer image, name lines (added lines only) |
 | `Stream Tool/Resources/Scripts/VS Screen.js` | one import and one call |
 | `Stream Tool/Resources/Scripts/VS Screen/Player/Player Name.mjs` | 2 text sizes |
